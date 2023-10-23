@@ -22,7 +22,19 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
-
+    :root{
+      --base:#ffc600;
+      --spacing:30px;
+      --blur:10px
+    }
+    img{
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+    .hl{
+      color: var(--base);
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -46,6 +58,22 @@
   </style>
 
   <script>
+    const input=document.querySelectorAll('.controls input')
+    // console.log(Array.from(input));
+
+    // function handleInput(){
+    //   const suffix=this.dataset.sizing || " "
+    //   console.log(this.value+suffix);
+    // }
+
+    const handleInput=(e)=>{
+      const suffix=e.target.dataset.sizing || " "
+      // console.log(e.target.name);
+      console.log(e.target.value+suffix);
+      document.documentElement.style.setProperty(`--${e.target.name}`,e.target.value+suffix)
+    }
+    Array.from(input).map(inp=>inp.addEventListener('change',handleInput))
+    input.forEach(inp=>inp.addEventListener('mousemove',handleInput))
   </script>
 
 </body>
